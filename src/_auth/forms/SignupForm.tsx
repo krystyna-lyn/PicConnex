@@ -1,15 +1,16 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { Button } from "@/components/ui/button"
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, } from "@/components/ui/form"
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { SingupValidation } from "@/lib/validation/validation"
 import { z } from "zod"
 import Loader from "@/components/shared/Loader"
 import { Link } from "react-router-dom"
+import { createUserAccount } from "@/lib/appwrite/api"
 
 const SignupForm = () => {
-let email: string;
+  let email: string;
 
   const isLoading = false;
 
@@ -23,9 +24,9 @@ let email: string;
 
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof SingupValidation>) {
-    console.log("Submitting values", values)
-    console.log(values)
-    //const new User = await createUserAccount(values);
+
+    const newUser = await createUserAccount(values);
+    console.log(newUser);
   }
 
   return (
